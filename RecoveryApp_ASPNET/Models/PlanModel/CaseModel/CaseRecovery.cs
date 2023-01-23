@@ -1,7 +1,15 @@
 ﻿namespace RecoveryApp_ASPNET.Models.PlanModel.CaseModel
 {
-    public class CaseRecovery
+    public abstract class CaseRecovery
     {
+        public abstract DateTime Date { get; set; }
+        public abstract long Id { get; set; }
+        public abstract string Stage { get; set; }
+        public abstract double Value { get; set; }
+        public abstract double CoverageValue { get; set; }
+        public abstract string? PostCode { get; set; }
+        public abstract string? Observation { get; set; }
+        public abstract string? CaseType { get; set; }
 
     }
 }
