@@ -43,6 +43,7 @@ namespace RecoveryApp_ASPNET.Data
                     AddressId = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"),
                 });
             });
+
         }
     }
 }

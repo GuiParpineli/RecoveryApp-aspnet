@@ -25,7 +25,7 @@ namespace RecoveryApp_ASPNET.Data
             builder.Entity<Customer>()
                 .HasOne(a => a.Address)
                 .WithMany(a => a.Customers);
-            new DbSetInitializer(builder).Seed();
+            new DbInitializer(builder).Seed();
         }
     }
 }
