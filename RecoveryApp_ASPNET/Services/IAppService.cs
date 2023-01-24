@@ -2,13 +2,13 @@
 
 namespace RecoveryApp_ASPNET.Services
 {
-    public interface IAppService<T>
+    public interface IAppService
     {
-        Task<List<T>> GetAsync();
-        Task<T> GetByIdAsync(Guid Id);
-        Task<T> AddAsync(T t);
-        Task<T> UpdateAsync(T t);
-        Task<(bool, string)> DeleteAsync(T t);
+        Task<List<Customer>> GetCustomerAsync();
+        Task<Customer> GetCustomerAsync(Guid Id);
+        Task<Customer> AddCustomerAsync(Customer customer);
+        Task<Customer> UpdateCustomerAsync(Customer customer);
+        Task<(bool, string)> DeleteCustomerAsync(Customer customer);
 
     }
 }
