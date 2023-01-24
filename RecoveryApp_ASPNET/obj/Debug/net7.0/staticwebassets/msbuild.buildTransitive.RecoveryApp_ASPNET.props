@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\RecoveryApp_ASPNET.props" />
+</Project>

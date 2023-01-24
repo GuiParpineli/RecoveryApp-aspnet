@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "IO+KI/ykANiBrfEq/5dsJDhE7u57Lgv0BbLcL8+fiDU=",
+  "Source": "RecoveryApp_ASPNET",
+  "BasePath": "_content/RecoveryApp_ASPNET",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

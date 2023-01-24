@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "r/+DtDSjBCTN8cpHIwBPPtZVoNpBQ3g6SfCD3zh+3jFbBkNSmYShDOMcODKFFBgYnf1FE+FHdVY3aVyXBPwb4Q==",
+  "dgSpecHash": "MkEgn/CVXT2G/84u4En/NaN9jjbLwqpryafqJfhWa9tMvNLGFGIHQdWWQRcUBussJesx5DDd9GlWrb0lYEbRIQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\guilh\\source\\repos\\RecoveryApp_ASPNET\\RecoveryApp_ASPNET\\RecoveryApp_ASPNET.csproj",
   "expectedPackageFiles": [
@@ -18,6 +18,7 @@
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.entityframeworkcore.design\\7.0.2\\microsoft.entityframeworkcore.design.7.0.2.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.entityframeworkcore.relational\\7.0.2\\microsoft.entityframeworkcore.relational.7.0.2.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.entityframeworkcore.sqlserver\\7.0.2\\microsoft.entityframeworkcore.sqlserver.7.0.2.nupkg.sha512",
+    "C:\\Users\\guilh\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\7.0.2\\microsoft.entityframeworkcore.tools.7.0.2.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\7.0.0\\microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "C:\\Users\\guilh\\.nuget\\packages\\microsoft.extensions.caching.memory\\7.0.0\\microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",

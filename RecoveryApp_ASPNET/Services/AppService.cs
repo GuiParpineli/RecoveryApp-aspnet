@@ -4,61 +4,59 @@ using RecoveryApp_ASPNET.Models;
 
 namespace RecoveryApp_ASPNET.Services
 {
-    public class AppService : IAppService  
+    public class AppService : IAppService
     {
 
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _context;
 
-        public AppService(AppDbContext db)
+        public AppService(AppDbContext context)
         {
-            _db = db;
+            _context = context;
         }
-        public async Task<List<Customer>> GetCustomerAsync()
+
+        #region Customers
+        public async Task<List<Customer>> GetCustomersListAsync()
         {
             try
             {
-                return await _db.Customers.ToListAsync();
+                return await _context.Customers.ToListAsync();
+            }
+            catch (Exception ex) { return null; }
+        }
+
+        public async Task<Customer> GetCustomerByIdAsync(Guid id)
+        {
+            try
+            {
+                return await _context.Customers.FindAsync(id);
             }
             catch (Exception ex)
-            { 
+            {
                 return null;
             }
         }
 
-        public async Task<Customer> GetCustomerAsync(Guid Id)
-        {
-            try
-            {
-                return await _db.Customers.FindAsync(Id);
-            }
-            catch(Exception ex)
-            {
-                return null;
-            }
-        }
 
         public async Task<Customer> AddCustomerAsync(Customer customer)
         {
             try
             {
-                await _db.Customers.AddAsync(customer);
-                await _db.SaveChangesAsync();
-                return await _db.Customers.FindAsync(customer.Id);
-            }catch(Exception ex) 
-            {
-                return null; 
+                await _context.Customers.AddAsync(customer);
+                await _context.SaveChangesAsync();
+                return await _context.Customers.FindAsync(customer.Id);
             }
+            catch(Exception ex) { return null; }
         }
 
         public async Task<Customer> UpdateCustomerAsync(Customer customer)
         {
             try
             {
-                _db.Entry(customer).State = EntityState.Modified;
-                await _db.SaveChangesAsync();
+                _context.Entry(customer).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
                 return customer;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -68,20 +66,23 @@ namespace RecoveryApp_ASPNET.Services
         {
             try
             {
-                var dbCustomer = await _db.Customers.FindAsync(customer.Id);
+                var dbCustomer = await _context.Customers.FindAsync(customer.Id);
                 if(dbCustomer == null)
                 {
-                    return (false, "Customer could not be found");
+                    return (false, "None customers found.");
                 }
-                _db.Customers.Remove(dbCustomer);
-                await _db.SaveChangesAsync();
+
+                _context.Customers.Remove(dbCustomer);
+                await _context.SaveChangesAsync();
                 return (true, "Customer got deleted.");
             }
-            catch(Exception ex)
+            catch(Exception e)
             {
-                return(false, $"An error occured. Error Message: {ex.Message}");
+                return (false, $"Error. Error message:{e.Message}");
             }
         }
 
+
     }
 }
+        #endregion Customers

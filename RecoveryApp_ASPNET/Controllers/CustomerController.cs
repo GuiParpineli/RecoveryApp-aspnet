@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecoveryApp_ASPNET.Models;
 using RecoveryApp_ASPNET.Services;
 
 namespace RecoveryApp_ASPNET.Controllers
@@ -10,17 +9,15 @@ namespace RecoveryApp_ASPNET.Controllers
     {
         private readonly IAppService _appService;
 
-        public CustomerController(AppService appService)
+        public CustomerController(IAppService appService)
         {
             _appService = appService;
         }
 
-
-
         [HttpGet]
         public async Task<IActionResult> GetCustomers()
         {
-            var customers = await _appService.GetCustomerAsync();
+            var customers = await _appService.GetCustomersListAsync();
             if(customers == null)
             {
                 return StatusCode(StatusCodes.Status204NoContent);

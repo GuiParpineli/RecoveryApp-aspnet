@@ -1,4 +1,5 @@
 ﻿using RecoveryApp_ASPNET.Models.PlanModel.CaseModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecoveryApp_ASPNET.Models.PlanModel
 {

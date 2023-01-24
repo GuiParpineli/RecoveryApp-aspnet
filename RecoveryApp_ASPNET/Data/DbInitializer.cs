@@ -34,13 +34,13 @@ namespace RecoveryApp_ASPNET.Data
             {
                 a.HasData(new Customer
                 {
-                    Id = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"),
+                    Id = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"),
                     Name = "Paulo",
                     LastName = "Wilson",
                     Cpf = "14512-45",
                     Phone = "18 54754-46456",
                     Gender = GenderEnum.MASCULINO,
-                    AddressId = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"),
+                    AddressId = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59")
                 });
             });
 
