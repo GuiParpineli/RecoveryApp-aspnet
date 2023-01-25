@@ -3,7 +3,7 @@
     public abstract class CaseRecovery
     {
         public abstract DateTime Date { get; set; }
-        public abstract long Id { get; set; }
+        public abstract Guid Id { get; set; }
         public abstract string Stage { get; set; }
         public abstract double Value { get; set; }
         public abstract double CoverageValue { get; set; }

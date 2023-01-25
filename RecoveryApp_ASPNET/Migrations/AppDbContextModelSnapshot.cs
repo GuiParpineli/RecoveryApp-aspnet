@@ -105,7 +105,7 @@ namespace RecoveryAppASPNET.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"),
+                            Id = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"),
                             AddressId = new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"),
                             Cpf = "14512-45",
                             Gender = 0,
@@ -117,11 +117,9 @@ namespace RecoveryAppASPNET.Migrations
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.CaseModel.CaseRecovery", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CaseType")
                         .HasColumnType("nvarchar(max)");
@@ -160,11 +158,9 @@ namespace RecoveryAppASPNET.Migrations
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.Plan", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -173,7 +169,7 @@ namespace RecoveryAppASPNET.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid?>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("FinalDate")
@@ -193,6 +189,18 @@ namespace RecoveryAppASPNET.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Plans");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"),
+                            Code = "XJ420",
+                            CreateAt = new DateTime(2023, 1, 25, 20, 37, 5, 257, DateTimeKind.Local).AddTicks(1110),
+                            CustomerId = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"),
+                            IsActive = true,
+                            RecidivistCustomer = false,
+                            Value = 2000.0
+                        });
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.PlanCase", b =>
@@ -203,17 +211,12 @@ namespace RecoveryAppASPNET.Migrations
                     b.Property<Guid>("CaseId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long?>("CaseRecoveryId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("PlanId1")
-                        .HasColumnType("bigint");
+                    b.Property<Guid?>("CaseRecoveryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("PlanId", "CaseId");
 
                     b.HasIndex("CaseRecoveryId");
-
-                    b.HasIndex("PlanId1");
 
                     b.ToTable("PlanCases");
                 });
@@ -289,10 +292,8 @@ namespace RecoveryAppASPNET.Migrations
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.Plan", b =>
                 {
                     b.HasOne("RecoveryApp_ASPNET.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Plans")
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });
@@ -305,7 +306,7 @@ namespace RecoveryAppASPNET.Migrations
 
                     b.HasOne("RecoveryApp_ASPNET.Models.PlanModel.Plan", "Plan")
                         .WithMany("PLanCases")
-                        .HasForeignKey("PlanId1")
+                        .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -317,6 +318,11 @@ namespace RecoveryAppASPNET.Migrations
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.Address", b =>
                 {
                     b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("RecoveryApp_ASPNET.Models.Customer", b =>
+                {
+                    b.Navigation("Plans");
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.Plan", b =>

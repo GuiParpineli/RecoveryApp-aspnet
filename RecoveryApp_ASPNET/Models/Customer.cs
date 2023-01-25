@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RecoveryApp_ASPNET.Models.PlanModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace RecoveryApp_ASPNET.Models
 {
@@ -13,5 +14,6 @@ namespace RecoveryApp_ASPNET.Models
         public GenderEnum Gender { get; set; }
         public Guid? AddressId { get; set; }
         public Address? Address { get; set; }
+        public List<Plan> Plans { get; set; }
     }
 }

@@ -32,8 +32,7 @@ namespace RecoveryAppASPNET.Migrations
                 name: "CaseRecovery",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Stage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<double>(type: "float", nullable: false),
@@ -86,15 +85,14 @@ namespace RecoveryAppASPNET.Migrations
                 name: "Plans",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Value = table.Column<double>(type: "float", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RecidivistCustomer = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,8 +101,7 @@ namespace RecoveryAppASPNET.Migrations
                         name: "FK_Plans_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -113,8 +110,7 @@ namespace RecoveryAppASPNET.Migrations
                 {
                     PlanId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CaseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PlanId1 = table.Column<long>(type: "bigint", nullable: false),
-                    CaseRecoveryId = table.Column<long>(type: "bigint", nullable: true)
+                    CaseRecoveryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -125,8 +121,8 @@ namespace RecoveryAppASPNET.Migrations
                         principalTable: "CaseRecovery",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PlanCases_Plans_PlanId1",
-                        column: x => x.PlanId1,
+                        name: "FK_PlanCases_Plans_PlanId",
+                        column: x => x.PlanId,
                         principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -140,7 +136,12 @@ namespace RecoveryAppASPNET.Migrations
             migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "AddressId", "Cpf", "Gender", "LastName", "Name", "Phone" },
-                values: new object[] { new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), "14512-45", 0, "Wilson", "Paulo", "18 54754-46456" });
+                values: new object[] { new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), "14512-45", 0, "Wilson", "Paulo", "18 54754-46456" });
+
+            migrationBuilder.InsertData(
+                table: "Plans",
+                columns: new[] { "Id", "Code", "CreateAt", "CustomerId", "FinalDate", "IsActive", "RecidivistCustomer", "Value" },
+                values: new object[] { new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), "XJ420", new DateTime(2023, 1, 25, 20, 37, 5, 257, DateTimeKind.Local).AddTicks(1110), new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), null, true, false, 2000.0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_AddressId",
@@ -151,11 +152,6 @@ namespace RecoveryAppASPNET.Migrations
                 name: "IX_PlanCases_CaseRecoveryId",
                 table: "PlanCases",
                 column: "CaseRecoveryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlanCases_PlanId1",
-                table: "PlanCases",
-                column: "PlanId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Plans_CustomerId",
