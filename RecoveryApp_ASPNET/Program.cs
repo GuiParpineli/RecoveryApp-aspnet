@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RecoveryApp_ASPNET.Data;
+using RecoveryApp_ASPNET.Interfaces;
 using RecoveryApp_ASPNET.Services;
 using System.Text.Json.Serialization;
 
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IAppService, AppService>();
+builder.Services.AddTransient<ICustomerRepository, CustomerService>();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>
 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
