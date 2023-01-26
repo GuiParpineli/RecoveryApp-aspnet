@@ -1,24 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecoveryApp_ASPNET.Data;
-using RecoveryApp_ASPNET.Models;
+using RecoveryApp_ASPNET.Interfaces;
 using RecoveryApp_ASPNET.Models.PlanModel;
 
 namespace RecoveryApp_ASPNET.Services
 {
-    public class AppService : IAppService
+    public class PlanService : IPlanRepository
     {
-
         private readonly AppDbContext _context;
 
-        public AppService(AppDbContext context)
+        public PlanService(AppDbContext context)
         {
             _context = context;
         }
 
-
-        #region Plan
-
-        public async Task<List<Plan>> GetPlansAsync()
+        public async Task<List<Plan>> GetAllAsync()
         {
             try
             {
@@ -28,7 +24,7 @@ namespace RecoveryApp_ASPNET.Services
 
         }
 
-        public async Task<Plan> GetPlanByIdAsync(Guid id)
+        public async Task<Plan> GetByIdAsync(Guid id)
         {
             try
             {
@@ -40,7 +36,7 @@ namespace RecoveryApp_ASPNET.Services
             }
         }
 
-        public async Task<Plan> AddPlanAsync(Plan plan)
+        public async Task<Plan> AddAsync(Plan plan)
         {
             try
             {
@@ -51,7 +47,7 @@ namespace RecoveryApp_ASPNET.Services
             catch (Exception ex) { return null; }
         }
 
-        public async Task<Plan> UpdatePlanAsync(Plan plan)
+        public async Task<Plan> UpdateAsync(Plan plan)
         {
             try
             {
@@ -65,7 +61,7 @@ namespace RecoveryApp_ASPNET.Services
             }
         }
 
-        public async Task<(bool, string)> DeletePlanAsync(Plan plan)
+        public async Task<(bool, string)> DeleteAsync(Plan plan)
         {
             try
             {
@@ -85,6 +81,5 @@ namespace RecoveryApp_ASPNET.Services
             }
         }
 
-        #endregion Plan
     }
 }

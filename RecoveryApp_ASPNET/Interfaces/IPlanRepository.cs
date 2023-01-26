@@ -2,7 +2,7 @@
 
 namespace RecoveryApp_ASPNET.Interfaces
 {
-    public interface IPlanReposirory : IAppRepository<Plan>
+    public interface IPlanRepository : IAppRepository<Plan>
     {
     }
 }

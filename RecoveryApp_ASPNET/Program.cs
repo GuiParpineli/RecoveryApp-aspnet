@@ -13,7 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<IAppService, AppService>();
+builder.Services.AddTransient<IPlanRepository, PlanService>();
 builder.Services.AddTransient<ICustomerRepository, CustomerService>();
 
 builder.Services.AddDbContext<AppDbContext>(opt =>

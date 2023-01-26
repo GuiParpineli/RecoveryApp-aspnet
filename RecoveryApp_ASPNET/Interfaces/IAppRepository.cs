@@ -1,6 +1,6 @@
 ﻿namespace RecoveryApp_ASPNET.Interfaces
 {
-    public interface IAppRepository<T> where T : class
+    public interface IAppRepository<T>
     {
         Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(Guid id);
