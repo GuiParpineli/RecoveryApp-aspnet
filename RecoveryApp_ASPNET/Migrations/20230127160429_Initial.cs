@@ -12,7 +12,7 @@ namespace RecoveryAppASPNET.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Address",
+                name: "Addresses",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -25,7 +25,7 @@ namespace RecoveryAppASPNET.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Address", x => x.Id);
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,6 +60,28 @@ namespace RecoveryAppASPNET.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Bondsmans",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cpf = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bondsmans", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bondsmans_Addresses_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Addresses",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -75,9 +97,9 @@ namespace RecoveryAppASPNET.Migrations
                 {
                     table.PrimaryKey("PK_Customers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customers_Address_AddressId",
+                        name: "FK_Customers_Addresses_AddressId",
                         column: x => x.AddressId,
-                        principalTable: "Address",
+                        principalTable: "Addresses",
                         principalColumn: "Id");
                 });
 
@@ -92,11 +114,17 @@ namespace RecoveryAppASPNET.Migrations
                     CreateAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FinalDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     RecidivistCustomer = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BondsmanId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plans", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Plans_Bondsmans_BondsmanId",
+                        column: x => x.BondsmanId,
+                        principalTable: "Bondsmans",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Plans_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -129,7 +157,7 @@ namespace RecoveryAppASPNET.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Address",
+                table: "Addresses",
                 columns: new[] { "Id", "City", "Complement", "Country", "State", "Street", "ZipCode" },
                 values: new object[] { new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), "Berilo", "", "Brasil", "MG", "Rua das Flores", "35485-300" });
 
@@ -140,8 +168,13 @@ namespace RecoveryAppASPNET.Migrations
 
             migrationBuilder.InsertData(
                 table: "Plans",
-                columns: new[] { "Id", "Code", "CreateAt", "CustomerId", "FinalDate", "IsActive", "RecidivistCustomer", "Value" },
-                values: new object[] { new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), "XJ420", new DateTime(2023, 1, 25, 20, 37, 5, 257, DateTimeKind.Local).AddTicks(1110), new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), null, true, false, 2000.0 });
+                columns: new[] { "Id", "BondsmanId", "Code", "CreateAt", "CustomerId", "FinalDate", "IsActive", "RecidivistCustomer", "Value" },
+                values: new object[] { new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), null, "XJ420", new DateTime(2023, 1, 27, 13, 4, 29, 35, DateTimeKind.Local).AddTicks(4499), new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), null, true, false, 2000.0 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bondsmans_AddressId",
+                table: "Bondsmans",
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customers_AddressId",
@@ -152,6 +185,11 @@ namespace RecoveryAppASPNET.Migrations
                 name: "IX_PlanCases_CaseRecoveryId",
                 table: "PlanCases",
                 column: "CaseRecoveryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Plans_BondsmanId",
+                table: "Plans",
+                column: "BondsmanId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Plans_CustomerId",
@@ -172,10 +210,13 @@ namespace RecoveryAppASPNET.Migrations
                 name: "Plans");
 
             migrationBuilder.DropTable(
+                name: "Bondsmans");
+
+            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Address");
+                name: "Addresses");
         }
     }
 }

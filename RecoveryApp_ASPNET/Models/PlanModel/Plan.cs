@@ -15,5 +15,7 @@ namespace RecoveryApp_ASPNET.Models.PlanModel
         public IList<PlanCase>? PLanCases { get; set; }
         public Guid? CustomerId { get; set; }
         public Customer? Customer { get; set; }
+        public Guid? BondsmanId { get; set; }
+        public Bondsman? Bondsman { get; set; }
     }
 }

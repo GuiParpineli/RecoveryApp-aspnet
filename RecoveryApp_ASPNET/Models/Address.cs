@@ -13,5 +13,6 @@ namespace RecoveryApp_ASPNET.Models
         public string Country { get; set; }
         public string? Complement { get; set; }
         public List<Customer> Customers { get; set; }
+        public List<Bondsman> Bondsmans { get; set; }
     }
 }

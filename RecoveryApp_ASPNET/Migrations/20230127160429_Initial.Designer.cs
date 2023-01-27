@@ -12,7 +12,7 @@ using RecoveryApp_ASPNET.Data;
 namespace RecoveryAppASPNET.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230125233705_Initial")]
+    [Migration("20230127160429_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -56,7 +56,7 @@ namespace RecoveryAppASPNET.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Address");
+                    b.ToTable("Addresses");
 
                     b.HasData(
                         new
@@ -69,6 +69,41 @@ namespace RecoveryAppASPNET.Migrations
                             Street = "Rua das Flores",
                             ZipCode = "35485-300"
                         });
+                });
+
+            modelBuilder.Entity("RecoveryApp_ASPNET.Models.Bondsman", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("AddressId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.ToTable("Bondsmans");
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.Customer", b =>
@@ -165,6 +200,9 @@ namespace RecoveryAppASPNET.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("BondsmanId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -189,6 +227,8 @@ namespace RecoveryAppASPNET.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BondsmanId");
+
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Plans");
@@ -198,7 +238,7 @@ namespace RecoveryAppASPNET.Migrations
                         {
                             Id = new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"),
                             Code = "XJ420",
-                            CreateAt = new DateTime(2023, 1, 25, 20, 37, 5, 257, DateTimeKind.Local).AddTicks(1110),
+                            CreateAt = new DateTime(2023, 1, 27, 13, 4, 29, 35, DateTimeKind.Local).AddTicks(4499),
                             CustomerId = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"),
                             IsActive = true,
                             RecidivistCustomer = false,
@@ -283,6 +323,15 @@ namespace RecoveryAppASPNET.Migrations
                     b.HasDiscriminator().HasValue("TechnicalSupport");
                 });
 
+            modelBuilder.Entity("RecoveryApp_ASPNET.Models.Bondsman", b =>
+                {
+                    b.HasOne("RecoveryApp_ASPNET.Models.Address", "Address")
+                        .WithMany("Bondsmans")
+                        .HasForeignKey("AddressId");
+
+                    b.Navigation("Address");
+                });
+
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.Customer", b =>
                 {
                     b.HasOne("RecoveryApp_ASPNET.Models.Address", "Address")
@@ -294,9 +343,15 @@ namespace RecoveryAppASPNET.Migrations
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.Plan", b =>
                 {
+                    b.HasOne("RecoveryApp_ASPNET.Models.Bondsman", "Bondsman")
+                        .WithMany("Plans")
+                        .HasForeignKey("BondsmanId");
+
                     b.HasOne("RecoveryApp_ASPNET.Models.Customer", "Customer")
                         .WithMany("Plans")
                         .HasForeignKey("CustomerId");
+
+                    b.Navigation("Bondsman");
 
                     b.Navigation("Customer");
                 });
@@ -320,7 +375,14 @@ namespace RecoveryAppASPNET.Migrations
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.Address", b =>
                 {
+                    b.Navigation("Bondsmans");
+
                     b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("RecoveryApp_ASPNET.Models.Bondsman", b =>
+                {
+                    b.Navigation("Plans");
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.Customer", b =>

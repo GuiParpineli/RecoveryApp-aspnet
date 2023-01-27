@@ -13,6 +13,8 @@ namespace RecoveryApp_ASPNET.Data
         }
 
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Bondsman> Bondsmans { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<PlanCase> PlanCases { get; set; }
         public DbSet<Missappropriation> Missappropriations { get; set; }
@@ -25,9 +27,18 @@ namespace RecoveryApp_ASPNET.Data
                 .HasOne(a => a.Address)
                 .WithMany(a => a.Customers);
 
+            builder.Entity<Bondsman>()
+                .HasOne(bondsman => bondsman.Address)
+                .WithMany(address => address.Bondsmans);
+
             builder.Entity<Plan>()
                 .HasOne(plan => plan.Customer)
                 .WithMany(customer => customer.Plans);
+
+            builder.Entity<Plan>()
+                .HasOne(plan => plan.Bondsman)
+                .WithMany(bondsman => bondsman.Plans);
+
 
             builder.Entity<PlanCase>()
                 .HasKey(p => new { p.PlanId, p.CaseId });
