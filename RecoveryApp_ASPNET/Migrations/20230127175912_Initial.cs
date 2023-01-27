@@ -162,6 +162,11 @@ namespace RecoveryAppASPNET.Migrations
                 values: new object[] { new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), "Berilo", "", "Brasil", "MG", "Rua das Flores", "35485-300" });
 
             migrationBuilder.InsertData(
+                table: "CaseRecovery",
+                columns: new[] { "Id", "BoStatus", "CaseType", "CoverageValue", "Date", "DiscountValue", "Discriminator", "Franchise", "FranchiseRate", "InitialTime", "Observation", "Payment", "PostCode", "SinistroType", "Stage", "Value" },
+                values: new object[] { new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb"), true, null, 0.0, new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2352), 0.0, "Sinistro", 2000.0, 0.0, new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2354), null, false, null, "FURTO", "EM_ABERTO", 200.0 });
+
+            migrationBuilder.InsertData(
                 table: "Customers",
                 columns: new[] { "Id", "AddressId", "Cpf", "Gender", "LastName", "Name", "Phone" },
                 values: new object[] { new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), new Guid("90d10994-3bdd-4ca2-a178-6a35fd653c59"), "14512-45", 0, "Wilson", "Paulo", "18 54754-46456" });
@@ -169,7 +174,12 @@ namespace RecoveryAppASPNET.Migrations
             migrationBuilder.InsertData(
                 table: "Plans",
                 columns: new[] { "Id", "BondsmanId", "Code", "CreateAt", "CustomerId", "FinalDate", "IsActive", "RecidivistCustomer", "Value" },
-                values: new object[] { new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), null, "XJ420", new DateTime(2023, 1, 27, 13, 4, 29, 35, DateTimeKind.Local).AddTicks(4499), new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), null, true, false, 2000.0 });
+                values: new object[] { new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), null, "XJ420", new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2303), new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"), null, true, false, 2000.0 });
+
+            migrationBuilder.InsertData(
+                table: "PlanCases",
+                columns: new[] { "CaseId", "PlanId", "CaseRecoveryId" },
+                values: new object[] { new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb"), new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"), null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Bondsmans_AddressId",

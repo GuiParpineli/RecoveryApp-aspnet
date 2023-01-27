@@ -1,9 +1,12 @@
-﻿namespace RecoveryApp_ASPNET.Models.PlanModel.CaseModel
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RecoveryApp_ASPNET.Models.PlanModel.CaseModel
 {
     public abstract class CaseRecovery
     {
-        public abstract DateTime Date { get; set; }
+        [Key]
         public abstract Guid Id { get; set; }
+        public abstract DateTime Date { get; set; }
         public abstract string Stage { get; set; }
         public abstract double Value { get; set; }
         public abstract double CoverageValue { get; set; }

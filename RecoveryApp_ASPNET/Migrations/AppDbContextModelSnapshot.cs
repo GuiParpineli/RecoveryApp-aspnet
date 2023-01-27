@@ -235,7 +235,7 @@ namespace RecoveryAppASPNET.Migrations
                         {
                             Id = new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"),
                             Code = "XJ420",
-                            CreateAt = new DateTime(2023, 1, 27, 13, 4, 29, 35, DateTimeKind.Local).AddTicks(4499),
+                            CreateAt = new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2303),
                             CustomerId = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb"),
                             IsActive = true,
                             RecidivistCustomer = false,
@@ -259,6 +259,13 @@ namespace RecoveryAppASPNET.Migrations
                     b.HasIndex("CaseRecoveryId");
 
                     b.ToTable("PlanCases");
+
+                    b.HasData(
+                        new
+                        {
+                            PlanId = new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"),
+                            CaseId = new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb")
+                        });
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.CaseModel.Missappropriation", b =>
@@ -305,6 +312,23 @@ namespace RecoveryAppASPNET.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Sinistro");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb"),
+                            CoverageValue = 0.0,
+                            Date = new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2352),
+                            Stage = "EM_ABERTO",
+                            Value = 200.0,
+                            BoStatus = true,
+                            DiscountValue = 0.0,
+                            Franchise = 2000.0,
+                            FranchiseRate = 0.0,
+                            InitialTime = new DateTime(2023, 1, 27, 14, 59, 12, 495, DateTimeKind.Local).AddTicks(2354),
+                            Payment = false,
+                            SinistroType = "FURTO"
+                        });
                 });
 
             modelBuilder.Entity("RecoveryApp_ASPNET.Models.PlanModel.CaseModel.TechnicalSupport", b =>

@@ -28,7 +28,8 @@ namespace RecoveryApp_ASPNET.Services
         {
             try
             {
-                return await _context.Plans.FindAsync(id);
+                return await _context.Plans.Include(a => a.PLanCases)
+                    .FirstOrDefaultAsync(p => p.Id == id);
             }
             catch (Exception e)
             {

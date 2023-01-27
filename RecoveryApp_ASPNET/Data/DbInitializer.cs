@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecoveryApp_ASPNET.Models;
 using RecoveryApp_ASPNET.Models.PlanModel;
+using RecoveryApp_ASPNET.Models.PlanModel.CaseModel;
 using System.Data;
 
 namespace RecoveryApp_ASPNET.Data
@@ -58,6 +59,35 @@ namespace RecoveryApp_ASPNET.Data
                     CustomerId = new Guid("98474b8e-d713-401e-8aee-acb7353f97bb")
                 });
             });
+
+            _builder.Entity<Sinistro>(a =>
+            {
+                a.HasData(new Sinistro
+                {
+                    Id = new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb"),
+                    Date = DateTime.Now,
+                    Stage = "EM_ABERTO",
+                    Value = 200.0,
+                    CoverageValue = 0,
+                    InitialTime = DateTime.Now,
+                    SinistroType = "FURTO",
+                    BoStatus = true,
+                    Franchise = 2000.0,
+                    FranchiseRate = 0,
+                    DiscountValue = 0,
+                    Payment = false
+                });
+            });
+
+            _builder.Entity<PlanCase>(a =>
+            {
+                a.HasData(new PlanCase
+                {
+                    PlanId = new Guid("f7e82895-0783-470a-a0d6-48b0f2be68b6"),
+                    CaseId = new Guid("be1a4c3d-d34c-4f21-9dee-c4bf841787fb")
+                });
+            }
+            );
 
         }
     }
