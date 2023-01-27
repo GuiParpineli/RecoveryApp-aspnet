@@ -1,4 +1,4 @@
-﻿using RecoveryApp_ASPNET.Models;
+﻿using RecoveryApp_ASPNET.Models.CustomerModel;
 
 namespace RecoveryApp_ASPNET.Interfaces
 {

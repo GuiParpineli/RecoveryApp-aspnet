@@ -1,9 +1,9 @@
 ﻿using RecoveryApp_ASPNET.Models.PlanModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace RecoveryApp_ASPNET.Models
+namespace RecoveryApp_ASPNET.Models.CustomerModel
 {
-    public class Bondsman
+    public class Customer
     {
         [Key]
         public Guid Id { get; set; }

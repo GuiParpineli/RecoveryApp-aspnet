@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RecoveryApp_ASPNET.Interfaces;
-using RecoveryApp_ASPNET.Models;
+using RecoveryApp_ASPNET.Models.CustomerModel;
 using RecoveryApp_ASPNET.Services;
 
 namespace RecoveryApp_ASPNET.Controllers

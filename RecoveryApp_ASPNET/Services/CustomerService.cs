@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RecoveryApp_ASPNET.Data;
 using RecoveryApp_ASPNET.Interfaces;
-using RecoveryApp_ASPNET.Models;
+using RecoveryApp_ASPNET.Models.CustomerModel;
 
 namespace RecoveryApp_ASPNET.Services
 {

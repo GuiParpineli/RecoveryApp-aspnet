@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecoveryApp_ASPNET.Models;
+using RecoveryApp_ASPNET.Models.CustomerModel;
 using RecoveryApp_ASPNET.Models.PlanModel;
 using RecoveryApp_ASPNET.Models.PlanModel.CaseModel;
 using System.Data;

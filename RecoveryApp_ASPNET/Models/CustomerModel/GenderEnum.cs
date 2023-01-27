@@ -1,4 +1,4 @@
-﻿namespace RecoveryApp_ASPNET.Models
+﻿namespace RecoveryApp_ASPNET.Models.CustomerModel
 {
     public enum GenderEnum
     {

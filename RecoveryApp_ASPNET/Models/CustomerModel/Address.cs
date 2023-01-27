@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RecoveryApp_ASPNET.Models
+namespace RecoveryApp_ASPNET.Models.CustomerModel
 {
     public class Address
     {
